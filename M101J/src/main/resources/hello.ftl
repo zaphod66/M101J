@@ -1,8 +1,8 @@
 <html>
-<head>
+  <head>
     <title>Welcome!</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Hello ${name}</h1>
-</body>
+  </body>
 </html>

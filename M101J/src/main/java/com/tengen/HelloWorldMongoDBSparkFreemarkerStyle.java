@@ -5,6 +5,7 @@ import java.net.*;
 import com.mongodb.*;
 
 import spark.*;
+import spark.Response;
 import freemarker.template.*;
 
 public class HelloWorldMongoDBSparkFreemarkerStyle {
@@ -37,6 +38,15 @@ public class HelloWorldMongoDBSparkFreemarkerStyle {
                 return writer;
             }
             
-        });        
+        });
+        
+        Spark.get(new Route("/echo/:thing") {
+
+            @Override
+            public Object handle(Request request, Response response) {
+                return request.params(":thing");
+            }
+            
+        });
     }
 }
