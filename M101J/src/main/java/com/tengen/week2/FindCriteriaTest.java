@@ -20,7 +20,9 @@ public class FindCriteriaTest {
             );
         }
         
-        DBObject query = new BasicDBObject("x", 0);
+        DBObject query = new BasicDBObject()
+                                .append("x", 0)
+                                .append("y", new BasicDBObject("$gt", 10).append("$lt", 90));
         
         System.out.println("count()");
         long cnt = coll.count(query);
