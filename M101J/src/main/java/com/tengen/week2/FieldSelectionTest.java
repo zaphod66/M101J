@@ -5,33 +5,31 @@ import java.util.*;
 
 import com.mongodb.*;
 
-public class FindCriteriaTest {
+public class FieldSelectionTest {
     public static void main(String[] args) throws UnknownHostException {
         MongoClient client = new MongoClient();
         DB courseDB = client.getDB("course");
-        DBCollection coll = courseDB.getCollection("findCriteriaTest");
+        DBCollection coll = courseDB.getCollection("FieldSelectionTest");
         
         coll.drop();
         
+        Random rand = new Random();
         for (int i = 0; i < 10; i++) {
             coll.insert(new BasicDBObject()
-                               .append("x",  new Random().nextInt(2))
-                               .append("y",  new Random().nextInt(100))
+                               .append("x", rand.nextInt(2))
+                               .append("y", rand.nextInt(100))
+                               .append("z", rand.nextInt(1000))
             );
         }
         
-        QueryBuilder builder = QueryBuilder.start("x").is(0).and("y").greaterThan(10).lessThan(90);
+        DBObject query = QueryBuilder.start("x").is(0).and("y").greaterThan(10).lessThan(70).get();
 
-//        DBObject query = new BasicDBObject()
-//                                .append("x", 0)
-//                                .append("y", new BasicDBObject("$gt", 10).append("$lt", 90));
-        
         System.out.println("count()");
-        long cnt = coll.count(builder.get());
+        long cnt = coll.count(query);
         System.out.println(cnt);
 
         System.out.println("find()");
-        DBCursor cursor = coll.find(builder.get());
+        DBCursor cursor = coll.find(query, new BasicDBObject("y", true).append("_id", false).append("z", true));
         try {
             while (cursor.hasNext()) {
                 DBObject cur = cursor.next();
