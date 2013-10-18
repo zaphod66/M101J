@@ -12,14 +12,14 @@ public class DocumentRepresentationTest {
         DBCollection collection = courseDB.getCollection("insertTest");
         
         BasicDBObject doc = new BasicDBObject();
-        doc.put("name", "nschelle");
+        doc.put("name", "zaphod");
         doc.put("age",  42);
         doc.put("programmer",  true);
         doc.put("languages", Arrays.asList("Java", "Scala", "C++", "C#"));
         doc.put("address", new BasicDBObject()
-                            .append("street", "Jahnstraße 72b")
-                            .append("town", "Schenefeld")
-                            .append("zip", 22869));
+                            .append("street", "20 Main")
+                            .append("town", "Pangratea")
+                            .append("zip", 2122869));
         
         System.out.println("before: " + doc);
         collection.insert(doc);
