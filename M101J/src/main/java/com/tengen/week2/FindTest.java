@@ -33,6 +33,7 @@ public class FindTest {
         }
         
         System.out.println("count()");
-        
+        long cnt = coll.count();
+        System.out.println(cnt);
     }
 }
