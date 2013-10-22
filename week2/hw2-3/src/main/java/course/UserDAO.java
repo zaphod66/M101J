@@ -48,16 +48,22 @@ public class UserDAO {
         // be sure to add username and hashed password to the document. problem instructions
         // will tell you the schema that the documents must follow.
 
+        BasicDBObject userDoc = new BasicDBObject();
+        userDoc.put("_id", username);
+        userDoc.put("password", passwordHash);
 
 
         if (email != null && !email.equals("")) {
             // XXX WORK HERE
             // if there is an email address specified, add it to the document too.
+            userDoc.put("email", email);
         }
 
         try {
             // XXX WORK HERE
             // insert the document into the user collection here
+            
+            usersCollection.insert(userDoc);
             return true;
         } catch (MongoException.DuplicateKey e) {
             System.out.println("Username already in use: " + username);
@@ -71,6 +77,8 @@ public class UserDAO {
         // XXX look in the user collection for a user that has this username
         // assign the result to the user variable.
 
+        DBObject query = new BasicDBObject("_id", username);
+        user = usersCollection.findOne(query);
         if (user == null) {
             System.out.println("User not in database");
             return null;
