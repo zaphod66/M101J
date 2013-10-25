@@ -26,8 +26,10 @@ ${post["body"]}
         </#list>
     </#if>
 <p>
+    <hr>
     Comments:
 <ul>
+    <hr>
     <#if post["comments"]??>
         <#assign numComments = post["comments"]?size>
             <#else>
