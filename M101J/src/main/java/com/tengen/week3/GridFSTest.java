@@ -1,7 +1,6 @@
 package com.tengen.week3;
 
 import java.io.*;
-import java.net.*;
 import java.util.*;
 
 import com.mongodb.*;
